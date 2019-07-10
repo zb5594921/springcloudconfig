@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+# 服务与服务之间相互调用一般都是根据这个name 。
+spring:
+  application:
+    name: web-feign
+  cloud:
+    config:
+      uri: http://localshot:8888
+      name: user-service
+      label: master
+      profile: dev
+eureka:
+  client:
+    serviceUrl:
+      #      指定服务注册中心的地址
+      defaultZone: http://localhost:8001/eureka/
+
+#feign 自带熔断器，需要在配置中打开，如下
+feign:
+  hystrix:
+    enabled: true
